@@ -1,0 +1,63 @@
+
+
+
+
+Angular Files and Usage
+--------------------------------------------------------------------------------------------------
+1. E2E
+    - end to end test scripts will be residing here
+    - protractor frameworks is used to run end to end tests
+        > Jasmine and Karma runner
+    - app.po.ts -> Protractor file which will have "po" file
+    - app.e2e-spec.ts
+        > e2e = it tells that this script is end to end functional test script
+        > spec = whenever spec is added, that means it is a test script
+
+2. node_modules
+    - this is folder where modules and libraries reside
+    - add/remove modules/packages
+    - is not touched for development purposes
+
+3. src 
+    - main workarea/app code resides inside this folder
+    - app folder holds components, modules, services, directives, pipes, etc.
+    - spec files are the unit test scripts
+    - assets folder holds stylesheets, icons, images, etc.
+    - enviornments -> configure variables or pipelines for dev, test, stage, and prod
+    - polyfills -> if browser is outdated, polyfills will add ES6 functionality
+--------------------------------------------------------------------------------------------------
+    Booting process
+
+    - Main.ts -> booting angular application
+        > first file that angular checks when compiling/loading application
+        > need atleast one module to be present in main.ts, AppModule is default, can be changed
+        > bootstrapModule is the one that loads and starts application
+            + NOT related to bootstrap framework
+
+    - test.ts -> test script for booting process
+        > all code in main.ts is tested here
+--------------------------------------------------------------------------------------------------
+    - styles.scss -> global stylesheet, dont make it heavy, generic typography, fonts, generic classes
+
+4. angular.json
+    - has all settings for project
+
+5. karma.conf.js
+    - karma runner for running unit test scripts
+    -  configure test scripts
+
+6. tsconfig.json
+    - build and compilation related to angular application
+
+7. tslint.json
+    - linting or coding standards
+
+8. package.json
+    - holds script commands which are useful in build pipelines
+    - tells us all of the required dependencies to run application
+
+9. package-lock.json
+    - EVERYTHING you need to run production
+    - shows dependencies required for every package in your app
+
+
