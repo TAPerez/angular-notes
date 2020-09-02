@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
 export class AppComponent {
   title = 'one-conversion';
   //-------------------ngIf---------------------------------------------------
@@ -91,8 +93,6 @@ user = {
   DOB:"1/30/1996",
   NetW: 2349472.78,
   rating: 4/5
-}
-
-
+};
 
 }
