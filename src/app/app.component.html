@@ -1,2 +1,110 @@
 <h1 class="bg-primary">Welcome To OneConversion</h1>
+<app-tasks></app-tasks>
+<app-completed-tasks></app-completed-tasks>
+
+<!--------------------------ngIf-------------------------------------------->
+<hr>
+<h4><b>ngIf</b></h4>
+<button (click)="btnClicked()">Click Me</button><br>
+<!-- <div *ngIf="showMsg;">Its true</div> --> <!--ngIf here-->
+<div *ngIf="showMsg then showThen else showElse"></div> <!--ngIf here but with then and else-->
+<ng-template #showThen>If statement is true, show then</ng-template>
+<ng-template #showElse>If statement is false, show else</ng-template>
+<br>
+
+<!--------------------------ngSwitch and event binding-------------------------------------------->
+<hr>
+<h4><b>ngSwitch and event binding</b></h4>
+<button (click)="othrBtnClicked()">Click Me</button> <!--event binding here-->
+<div [ngSwitch]="switchNumber"> <!--ngSwitch here-->
+    <div *ngSwitchCase="1">switchNumber is 1</div>
+    <div *ngSwitchCase="2">switchNumber is 2</div>
+    <div *ngSwitchCase="3">switchNumber is 3</div>
+    <div *ngSwitchCase="4">switchNumber is 4</div>
+    <div *ngSwitchDefault>switchNumber is 5</div>
+</div>
+
+<!--------------------------ngFor and interpolation-------------------------------------------->
+<hr>
+<h4><b>ngFor and interpolation</b></h4>
+<table class="table">
+    <tr>
+        <th> ID </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Index </th>
+        <th> First Index </th>
+        <th> Last Index </th>
+        <th> Even Index </th>
+        <th> Odd Index </th>
+    </tr>
+    <tr *ngFor="let peer of users index as i; first as f; last as l; even as e; odd as o"> <!--ngFor here-->
+        <td>{{peer.id}}</td> <!--interpolation here-->
+        <td>{{peer.fName}}</td>
+        <td>{{peer.lName}}</td>
+        <td>{{i}}</td>
+        <td>{{f}}</td>
+        <td>{{l}}</td>
+        <td>{{e}}</td>
+        <td>{{o}}</td>
+    </tr>
+</table>
+
+<!--------------------------ngStyle and property binding-------------------------------------------->
+<hr>
+<h4><b>ngStyle and property binding</b></h4>
+<button (click)="colorBtnClicked()" [ngStyle]="{'color':colorVal, 'background-color':colorVal2}">Click Me</button>
+<div [ngStyle]="{'color':colorVal}"> <!--ngStyle and property binding here-->
+    Angular
+</div>
+
+<!--------------------------ngClass-------------------------------------------->
+<hr>
+<h4><b>ngClass</b></h4>
+<button (click)="expBtnClicked()">Click Me</button>
+<div [ngClass]="'one'"> <!--using string-->
+    ngClass with string
+</div>
+<div [ngClass]="clsName"> <!--using component-->
+    ngClass with component method
+</div>
+<div [ngClass]="[clsNameM1, clsNameM2]"> <!--using array-->
+    ngClass with array
+</div>
+<div [ngClass]="{'five':clsNameE1, 'six':clsNameE2}"> <!--using expressions-->
+    ngClass with expressions
+</div>
+
+<!--------------------------attribute binding (useless???)-------------------------------------------->
+<hr>
+<h4><b>attribute binding</b></h4>
+<a [href]="hrefVal" [attr.updateLink]='updatedLink'>Google</a>
+<p>inspect the link and youll see oracle.com set as an attribute named "updateLink"</p>
+<!--------------------------two-way data binding-------------------------------------------->
+<hr>
+<h4><b>two-way data binding</b></h4>
+<input [(ngModel)]="firstName">
+<div>{{ firstName }}</div>
+
+<!--------------------------pipes-------------------------------------------->
+<hr>
+<h4><b>pipes</b></h4>
+<div>
+    <b>Built-in pipes:</b> lowercase, uppercase, date, currency, percent, json <br>
+    {{ user.first | lowercase }} - {{ user.last | uppercase }} - {{ user.DOB | date }} - {{ user.NetW | currency }} - {{ user.rating | percent }} - {{ user | json }}
+</div>
+<div>
+    <b>Parameterized pipes:</b> date, currency <br>
+    {{ user.DOB | date: 'longDate' }} - {{ user.NetW | currency: 'INR': 'code': '3.0-1' }} <!--".0-1" means minimum of 0 and max of 1 position to the right of decimal, it does round-->
+</div>
+<div>
+    <b>Chaining pipes:</b> date <br>
+    {{ user.DOB | date: 'long' | uppercase }}
+</div>
+<div>
+    <b>Custom pipes:</b> date <br>
+    {{ user.first | hightlight }}
+</div>
+
+
 <router-outlet></router-outlet>

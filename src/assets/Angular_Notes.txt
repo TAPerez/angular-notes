@@ -1,0 +1,246 @@
+_Angular_Notes_
+
+Angular Files and Usage
+    1. E2E
+        - end to end test scripts will be residing here
+        - protractor frameworks is used to run end to end tests
+            > Jasmine and Karma runner
+        - app.po.ts -> Protractor file which will have "po" file
+        - app.e2e-spec.ts
+            > e2e = it tells that this script is end to end functional test script
+            > spec = whenever spec is added, that means it is a test script
+
+    2. node_modules
+        - this is folder where modules and libraries reside
+        - add/remove modules/packages
+        - is not touched for development purposes
+
+    3. src 
+        - main workarea/app code resides inside this folder
+        - app folder holds components, modules, services, directives, pipes, etc.
+        - spec files are the unit test scripts
+        - assets folder holds stylesheets, icons, images, etc.
+        - enviornments -> configure variables or pipelines for dev, test, stage, and prod
+        - polyfills -> if browser is outdated, polyfills will add ES6 functionality
+        - Main.ts -> booting angular application
+            > first file that angular checks when compiling/loading application
+            > need atleast one module to be present in main.ts, AppModule is default, can be changed
+            > bootstrapModule is the one that loads and starts application
+                + NOT related to bootstrap framework
+        - test.ts -> test script for booting process
+            > all code in main.ts is tested here
+        - styles.scss -> global stylesheet, dont make it heavy, generic typography, fonts, generic classes
+
+    4. angular.json
+        - has all settings for project
+
+    5. karma.conf.js
+        - karma runner for running unit test scripts
+        -  configure test scripts
+
+    6. tsconfig.json
+        - build and compilation related to angular application
+
+    7. tslint.json
+        - linting or coding standards
+
+    8. package.json
+        - holds script commands which are useful in build pipelines
+        - tells us all of the required dependencies to run application
+
+    9. package-lock.json
+        - EVERYTHING you need to run production
+        - shows dependencies required for every package in your app
+        - will resolve all required sub modules
+
+Angular CLI 
+    1. commands
+        - ng new project-name
+        - ng --version
+        - ng generate
+            > component comp-name
+            > module mod-name
+            > service serv-name
+            > pipe pipe-name
+        - ng serve 
+            > by default: uses port 4200, use --port=3222 (or whatever number) to change it
+            > production is ahead of time, default for prod
+        - ng test
+            > runs all unit tests
+            > unit tests are written in jasmine framework
+            > tests are run using karma runner
+            > code coverage
+        - ng e2e
+            > will run all e2e tests
+        - ng update
+        - ng build
+            > mainly used for promoting code to high enviornments
+        - ng lint
+            > code syntax linting
+            > set rules for how code should be written
+            
+Modules
+    1. modules in angular are logical functionality
+    2. for ex: users module
+        - register
+        - forgot
+        - signup
+        - services
+    3. modules can have components, services, directives, pipes, etc
+        - all are related to a particular functionality
+    4. plug and play features
+    5. allows to be modular, easy to maintain and debug, reduces app footprint
+        - if you dont need it, dont load it
+    6. by default, every app has atleast 1 module
+        - AppModule
+    7. need to import required modules from core packages
+        - browserModule
+        - ngModule
+    8. every module needs to be defined by @ngModule
+    9. we can declare components we need
+    10. import other modules inside a module
+    11. bootstrap in app.module tells us which component is first to load
+        - default is AppCpmponent
+
+Decorators
+    1. all decorators are represented with @ 
+        - @NgModule
+        - @Component 
+        - @Injectable
+    2. define class decorators, inout decorators, etc
+    3. these decorators have specific meta data
+        - some meta data is mandatory, others are optional
+    4. @hostListener is an event decorator 
+    5. decorators are the way to pass meta data to angular application
+
+Components 
+    1. component is a smaller functionality which can be reused multiple times in the application
+    2. smaller feature inside a bigger functionality
+    3. allows easy maintenance and development
+    4. plug and play components where we need 
+    5. appComponent is the single most important component
+        - is provided by default
+        - in the index.html, the selector name is <app-root>
+    6. each comp has 3 important things
+        - selector
+        - templateUrl or template (straight html)
+        - stylesUrl
+    7. best to use templateUrl over template
+        - better organized and easier to maintain
+    8. you can have components inside other componenets
+        - to call a sub component we will use selector name and call the component
+    9. you can include a component from other module into AppModule or any other modules
+
+Directives 
+    1. component directives
+        - every angular application must have at least 1 component
+        - have its own templates
+        - events attatched
+    2. structural directives
+        - updates structure of the view
+        - *ngFor, *ngIf, *ngSwitch
+        - always start with *
+    3. attribute directives
+        - ngStyle, ngClass are the main 2
+
+ngIf, ngFor, ngSwitch
+    1. ngIf 
+        - <div *ngIf="showValue then showThen else showElse">Show Value</div>
+        - <ng-template #showThen>Show then msg</ng-template>
+        - <ng-template #showElse>Show else msg</ng-template>
+    2. ngFor
+        - <div *ngFor="let item of collection"></div>
+        - local variables in array data
+            > index: gets current index of the current element in iteration
+                + <div *ngFor="let item of collection; index as i">
+                + index starts with 0
+                + important whenever using DOM manipulation
+            > first: returns true if current element is the first element in iteration
+                + <div *ngFor="let item of collection; index as i; first as f">
+            > last: returns true if current element is the last element in iteration
+                + <div *ngFor="let item of collection; index as i; first as f; last as l">
+            > even: returns true if current element is the even element in iteration
+                + <div *ngFor="let item of collection; index as i; first as f; last as l; even as e">
+            > odd: returns true if current element is the odd element in iteration
+                + <div *ngFor="let item of collection; index as i; first as f; last as l; even as e; odd as o">
+    3. ngSwitch
+        - 3 important elements
+            > ngSwitch
+            > ngSwitchCase
+            > ngSwitchDefault
+        - <div [ngSwitch]="switch_expression">
+            <div *ngSwitchCase="match_expression_1>...</div>
+            <div *ngSwitchCase="match_expression_2>...</div>
+            <div *ngSwitchCase="match_expression_3>...</div>
+            <div *ngSwitchDefault>...</div>
+          </div>
+
+ngStyle, ngClass
+    1. ngStyle
+        - <div [ngStyle]='{color:colorVal}'>...</div>
+        - <div [ngStyle]="'background-color':value">...</div>
+    2. ngClass
+        - pass dynamic values as variables
+            > ngClass with string
+            > ngClass with array
+            > ngClass with object
+            > ngClass with component method
+        - <div [ngClass]="'scssClass'">Using ngClass with string</div>
+        - <div [ngClass]="[className1, className2]">Using ngClass with array</div>
+        - <div [ngClass]="className">Using ngClass with component method</div>
+        - <div [ngClass]="{'one':true, 'two':false}">With expressions</div>
+
+Data Binding
+    1. Means to bind the data from view (template) to controller (component class) and vice versa
+	2. Defines how the data flows and how the data gets updated based on business logic
+    3. Types of data Binding
+        - One-Way data Binding
+            > Component to View
+	            + Interpolation
+	                = Syntax: {{variable_name}}
+		        + Property Binding
+                    = Syntax: [property]="'expression'"
+		        + Style Binding
+                    = ngStyle and ngClass
+		        + Attribute Binding (useless?)
+                    = custom property you want to use
+                    = syntax: [attr.attribute_name]="'expression'"
+		    > View to Component
+		        + Event Binding
+                    = syntax: <button (event_name)="function()">Example</button>
+	    - Two Way Data Binding
+		    > Data flows from view to component and back to component from the view
+            > ngModule
+                + syntax = <input[(ngModel)]='data'/>
+
+Pipes
+    1. used to transform data
+    2. will tale data input and convert/transform into desired format
+    3. syntax: |
+    4. can apply pipes to any view/template and to any data inputs
+    5. types of pipes
+        - built in pipes
+            > lowercase
+            > uppercase
+            > currency
+            > date
+            > percent
+            > JSON
+        - parameterized pipes
+            > pass one or more parameters to pipes
+            > using :
+        - chaining pipes
+            > can connect multiple pipes to a data input
+        - custom pipes
+            > can create our own custom pipes for various data formatting
+            > can generate new custom pipes using CLI
+                + ng generate pipe highlight
+            > need to import the pipe and pipetransform from @angular/core
+            > pipes are declared with the decorator @pipe and provide the selector name
+
+
+
+
+
+
+
