@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 
 export class AppComponent {
-  title = 'I dont fucking work?!?!';
+  title = 'Angular Basic Examples';
   //-------------------ngIf---------------------------------------------------
   showMsg = true;
 
